@@ -1,19 +1,8 @@
-import {
-  IsDateString,
-  IsEnum,
-  IsInstance,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsDateString, IsEnum, IsOptional, IsString } from 'class-validator';
 import { TaskStatus } from '../entities/task.entity';
-import { User } from 'src/users/entities/user.entity';
-import { Transform, Type } from 'class-transformer';
+import { Transform } from 'class-transformer';
 
 export class CreateTaskDto {
-  @IsInstance(User)
-  @Type(() => User)
-  user: User;
-
   @IsString()
   title: string;
 

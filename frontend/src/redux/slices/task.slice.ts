@@ -7,7 +7,7 @@ export interface Task {
   title: string;
   description?: string;
   dueDate: Date;
-  status: 'DONE' | 'LATE' | 'TESTING' | 'PENDING' | 'STARTED';
+  status: 'DONE' | 'LATE' | 'TESTING' | 'PENDING' | 'STARTED' | string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
@@ -29,17 +29,16 @@ const storedToken = localStorage.getItem('token');
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
   const res = await api.get('/tasks', {headers: {Authorization: storedToken}});
-  console.log(res.data);
   return res.data;
 });
 
-export const createTask = createAsyncThunk('tasks/createTask', async (task: Omit<Task, 'id'>) => {
-  const res = await api.post('/tasks', task);
+export const createTask = createAsyncThunk('tasks/createTask', async (task: Omit<Task, 'id' | 'uuid' | 'createdAt' | 'updatedAt' | 'deletedAt'>) => {
+  const res = await api.post('/tasks', task, {headers: {Authorization: storedToken}});
   return res.data;
 });
 
-export const updateTask = createAsyncThunk('tasks/updateTask', async ({ id, data }: { id: string; data: Partial<Task> }) => {
-  const res = await api.patch(`/tasks/${id}`, data);
+export const updateTask = createAsyncThunk('tasks/updateTask', async ({ uuid, data }: { uuid: string; data: Partial<Task> }) => {
+  const res = await api.patch(`/tasks/${uuid}`, data, {headers: {Authorization: storedToken}});
   return res.data;
 });
 

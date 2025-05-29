@@ -6,10 +6,12 @@ import { useEffect } from "react";
 import ActionsMenu from "../../components/ActionsMenu";
 import { format } from 'date-fns'
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
+import { useNavigate } from "react-router-dom";
 
 const TasksPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { tasks, loading } = useSelector((state: RootState) => state.tasks);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -76,7 +78,7 @@ const TasksPage = () => {
           variant="contained"
           color="primary"
           sx={{ mb: 2 }}
-          onClick={() => {}}
+          onClick={() => navigate('/tarefa')}
         >
           Nova Tarefa
         </Button>

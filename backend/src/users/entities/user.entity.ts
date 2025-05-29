@@ -1,12 +1,10 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Task } from 'src/tasks/entities/task.entity';
 import { hashingPassword, Timestamps } from 'src/utils';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -30,9 +28,6 @@ export class User extends Timestamps {
 
   @Column({ unique: true })
   slug: string;
-
-  @OneToMany(() => Task, (task) => task.user)
-  tasks: Task[];
 
   @Expose()
   get fullname(): string {

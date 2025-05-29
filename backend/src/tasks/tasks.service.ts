@@ -35,7 +35,6 @@ export class TasksService {
     try {
       const tasks = await this.repository.find({
         order: { dueDate: 'ASC' },
-        relations: ['user'],
       });
 
       if (!tasks) {
@@ -56,7 +55,6 @@ export class TasksService {
     try {
       const task = await this.repository.findOne({
         where: { uuid },
-        relations: ['user'],
       });
 
       if (!task) {

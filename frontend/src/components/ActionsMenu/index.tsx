@@ -24,7 +24,7 @@ const ActionsMenu = ({ uuid, onActionComplete }: Props) => {
   const handleClose = () => setAnchorEl(null);
 
   const handleEdit = () => {
-    navigate(`/tarefas/${uuid}`);
+    navigate(`/tarefa/editar/${uuid}`);
     handleClose();
   };
 

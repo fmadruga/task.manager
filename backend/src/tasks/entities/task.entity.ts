@@ -1,13 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { User } from 'src/users/entities/user.entity';
 import { Timestamps } from 'src/utils';
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 export enum TaskStatus {
@@ -38,9 +31,6 @@ export class Task extends Timestamps {
 
   @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.PENDING })
   status: TaskStatus;
-
-  @ManyToOne(() => User, (user) => user.tasks)
-  user: User;
 
   @BeforeInsert()
   generateUUID() {
